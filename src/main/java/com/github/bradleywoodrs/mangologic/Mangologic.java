@@ -17,7 +17,7 @@ public final class Mangologic extends JavaPlugin{
         FileConfiguration config = getConfig();
         mobSpawnListener.setMaxPerChunk(config.getInt("max-mobs-per-chunk", 15));
         getServer().getPluginManager().registerEvents(mobSpawnListener, this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(discordSync), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(discordSync, this), this);
         DiscordSRV.api.subscribe(discordSync.discordsrvListener);
         discordSync.setGuildid((String) config.get("guildid"));
         discordSync.setBoosterroleid((String) config.get("boosterroleid"));

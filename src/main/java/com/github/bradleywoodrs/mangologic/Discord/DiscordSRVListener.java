@@ -26,13 +26,17 @@ public class DiscordSRVListener {
     }
 
     @Subscribe
-    public void accountsLinked(AccountLinkedEvent event) {
-        discordSync.SyncPlayer((Player) event.getPlayer());
+    public void accountsLinked(AccountLinkedEvent e) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            discordSync.SyncPlayer((Player) e.getPlayer());
+        });
     }
 
     @Subscribe
-    public void accountUnlinked(AccountUnlinkedEvent event) {
-        discordSync.SyncPlayer((Player) event.getPlayer());
+    public void accountUnlinked(AccountUnlinkedEvent e) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            discordSync.SyncPlayer((Player) e.getPlayer());
+        });
     }
 
 }
