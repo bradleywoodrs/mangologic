@@ -1,0 +1,4 @@
+name: mangologic
+version: '1.0'
+main: com.github.bradleywoodrs.mangologic.Mangologic
+api-version: '1.21'
