@@ -9,13 +9,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Mangologic extends JavaPlugin{
-    MobSpawnListener mobSpawnListener;
     DiscordSync discordSync = new DiscordSync(this);
     @Override
     public void onEnable() {
         saveDefaultConfig();
         FileConfiguration config = getConfig();
-        mobSpawnListener.setMaxPerChunk(config.getInt("max-mobs-per-chunk", 15));
+        MobSpawnListener mobSpawnListener = new MobSpawnListener();
+        mobSpawnListener.setMaxPerChunk(config.getInt("max-mobs-per-chunk"));
         getServer().getPluginManager().registerEvents(mobSpawnListener, this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(discordSync, this), this);
         DiscordSRV.api.subscribe(discordSync.discordsrvListener);
