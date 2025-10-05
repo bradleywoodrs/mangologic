@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,4 +54,9 @@ public class MobSpawnListener implements Listener {
 
         mobCountByChunk.computeIfPresent(key, (k, v) -> Math.max(0, v - 1));
     }
+    @EventHandler
+    public void onChunkUnload(ChunkUnloadEvent event) {
+        mobCountByChunk.remove(chunkKey(event.getChunk()));
+    }
 }
+
