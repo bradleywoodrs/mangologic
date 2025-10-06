@@ -66,7 +66,7 @@ public class PVPToggleListener implements Listener {
                 removeExpired(crystalOwners, crystalTimestamps, now);
                 removeExpired(tntOwners, tntTimestamps, now);
             }
-        }.runTaskTimer(plugin, 20L, 20L);
+        }.runTaskTimer(plugin, 100L, 100L);
     }
 
     private <K> void removeExpired(Map<K, UUID> map, Map<K, Long> timestamps, long now) {
