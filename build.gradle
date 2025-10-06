@@ -15,18 +15,12 @@ repositories {
     repositories {
         maven { url 'https://nexus.scarsz.me/content/groups/public/' }
     }
-    flatDir {
-        dirs 'libs'
-    }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
     compileOnly 'com.discordsrv:discordsrv:1.28.0'
     compileOnly 'net.luckperms:api:5.4'
-    implementation name: 'CombatLogX'
-    implementation name: 'Newbie Helper'
-    implementation name: 'BlueSlimeCore'
 }
 
 tasks {
