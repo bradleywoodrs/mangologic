@@ -155,7 +155,7 @@ public class PVPToggleListener implements Listener {
 
 
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent e) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public void onEntityDamage(EntityDamageEvent e) {
         if (!(e.getEntity() instanceof Player victim)) return;
 
         EntityDamageEvent.DamageCause cause = e.getCause();
@@ -196,13 +196,11 @@ public class PVPToggleListener implements Listener {
         Player victim = e.getEntity() instanceof Player p ? p : null;
         if (victim == null) return;
 
-        // Projectile damage
         if (e.getDamager() instanceof Projectile proj && proj.getShooter() instanceof Player shooter) {
             if (!isPvPAllowed(shooter, victim)) e.setCancelled(true);
             return;
         }
 
-        // Ender Crystal damage
         if (e.getDamager() instanceof EnderCrystal crystal) {
             Block block = crystal.getLocation().getBlock();
             UUID ownerId = crystalOwners.get(block);
@@ -211,7 +209,6 @@ public class PVPToggleListener implements Listener {
             return;
         }
 
-        // TNT damage
         if (e.getDamager() instanceof TNTPrimed tnt) {
             UUID ownerId = tntOwners.get(tnt.getEntityId());
             Player owner = ownerId != null ? Bukkit.getPlayer(ownerId) : null;
@@ -221,7 +218,7 @@ public class PVPToggleListener implements Listener {
 
 
     @EventHandler
-    public void onEntityExplode(EntityExplodeEvent e) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public void onEntityExplode(EntityExplodeEvent e) {
         Entity ent = e.getEntity();
         if (!(ent instanceof TNTPrimed || ent instanceof EnderCrystal)) return;
 
@@ -249,10 +246,6 @@ public class PVPToggleListener implements Listener {
         blocks.add(center.getRelative(0, 1, 0));
         blocks.add(center.getRelative(0, -1, 0));
         return blocks;
-    }
-
-    private ICombatLogX getAPI() {
-        return (ICombatLogX) Bukkit.getPluginManager().getPlugin("CombatLogX");
     }
 
     private boolean isPvPAllowed(Player attacker, Player victim) {
